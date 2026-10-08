@@ -1,30 +1,145 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 100px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dceeff;
 }
+
 
 .weather-card {
-    width: 350px;
-    margin: auto;
-    padding: 30px;
-    border-radius: 15px;
-    background-color: #f2f2f2;
+    width: 90%;
+    max-width: 800px;
+    padding: 35px;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+
+h1 {
+    margin-bottom: 5px;
 }
+
+
+h2 {
+    margin-top: 0;
+    font-weight: normal;
+}
+
+
+#weather-info {
+    margin: 25px 0;
+}
+
+
+#weather-icon {
+    font-size: 65px;
+    margin: 10px 0;
+}
+
+
 #temperature {
-    font-size: 32px;
+    font-size: 42px;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 10px 0;
 }
+
 
 #humidity,
 #condition {
     font-size: 18px;
+    margin: 8px;
+}
+
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+}
+
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+#forecast {
+    margin-top: 35px;
+}
+
+
+#forecast h3 {
+    margin-bottom: 20px;
+}
+
+
+#forecast-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+
+.forecast-day {
+    padding: 15px 8px;
+    border-radius: 12px;
+    background-color: #f3f7fb;
+}
+
+
+.forecast-date {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+.forecast-icon {
+    font-size: 32px;
+    margin: 12px 0;
+}
+
+
+.forecast-condition {
+    font-size: 12px;
+    min-height: 30px;
+}
+
+
+.forecast-temp {
+    font-size: 14px;
+}
+
+
+.forecast-temp strong {
+    font-size: 16px;
+}
+
+
+.forecast-temp span {
+    margin-left: 5px;
+    opacity: 0.6;
+}
+
+
+/* Responsive layout for smaller screens */
+
+@media (max-width: 700px) {
+
+    .weather-card {
+        padding: 25px 15px;
+    }
+
+    #forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
