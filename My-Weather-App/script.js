@@ -42,23 +42,46 @@ async function showWeather() {
     const latitude = 9.5916;
     const longitude = 76.5222;
 
-    const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weather_code`
-    );
+    const temperature = document.getElementById("temperature");
+    const humidity = document.getElementById("humidity");
+    const condition = document.getElementById("condition");
+    const icon = document.getElementById("weather-icon");
 
-    const data = await response.json();
+    try {
+        temperature.textContent = "Loading...";
+        humidity.textContent = "";
+        condition.textContent = "";
 
-    const temperature = data.current.temperature_2m;
-    const humidity = data.current.relative_humidity_2m;
-    const weatherCode = data.current.weather_code;
-    const description = getWeatherDescription(weatherCode);
-    const icon = getWeatherIcon(weatherCode);
-    const temperatureElement = document.getElementById("temperature");
-    const humidityElement = document.getElementById("humidity");
-    const conditionElement = document.getElementById("condition");
+        const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weather_code`
+        );
 
-temperatureElement.textContent = "Temperature: " + temperature + "°C";
-humidityElement.textContent = "Humidity: " + humidity + "%";
-conditionElement.textContent = "Condition: " + description;
-document.getElementById("weather-icon").textContent = icon;
+        const data = await response.json();
+
+        const currentTemperature = data.current.temperature_2m;
+        const currentHumidity = data.current.relative_humidity_2m;
+        const weatherCode = data.current.weather_code;
+
+        const description = getWeatherDescription(weatherCode);
+        const weatherIcon = getWeatherIcon(weatherCode);
+
+        temperature.textContent =
+            "Temperature: " + currentTemperature + "°C";
+
+        humidity.textContent =
+            "Humidity: " + currentHumidity + "%";
+
+        condition.textContent =
+            "Condition: " + description;
+
+        icon.textContent = weatherIcon;
+
+    } catch (error) {
+        temperature.textContent = "Unable to get weather";
+        humidity.textContent = "";
+        condition.textContent = "Please try again.";
+        icon.textContent = "⚠️";
+
+        console.error("Weather error:", error);
+    }
 }
